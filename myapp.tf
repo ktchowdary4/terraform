@@ -4,12 +4,14 @@ data "template_file" "myapp-task-definition-template" {
   template               = "${file("templates/app.json.tpl")}"
   vars {
     REPOSITORY_URL = "${replace("${aws_ecr_repository.myapp.repository_url}", "https://", "")}"
+    MYSQL_REPOSITORY_URL = "${replace("${aws_ecr_repository.mysql.repository_url}", "https://",
+"")}"
     APP_VERSION = "${var.MYAPP_VERSION}"
   }
 }
 
 resource "aws_ecs_task_definition" "myapp-task-definition" {
-  family                = "myapp"
+  family                = "springbootapp"
   container_definitions = "${data.template_file.myapp-task-definition-template.rendered}"
 }
 
@@ -24,8 +26,8 @@ resource "aws_ecs_service" "myapp-service" {
 
   load_balancer {
     elb_name = "${aws_elb.myapp-elb.name}"
-    container_name = "myapp"
-    container_port = 3000
+    container_name = "springbootapp"
+    container_port = 8080
   }
   lifecycle { ignore_changes = ["task_definition"] }
 }

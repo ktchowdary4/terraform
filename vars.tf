@@ -8,7 +8,7 @@ variable "PATH_TO_PUBLIC_KEY" {
   default = "mykey.pub"
 }
 variable "ECS_INSTANCE_TYPE" {
-  default = "t2.micro"
+  default = "t2.medium"
 }
 variable "ECS_AMIS" {
   type = "map"

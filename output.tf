@@ -7,3 +7,7 @@ output "jenkins" {
 output "myapp-repository-URL" {
   value = "${aws_ecr_repository.myapp.repository_url}"
 }
+output "mysql-repository-URL" {
+  value = "${aws_ecr_repository.mysql.repository_url}"
+}
+
